@@ -32,17 +32,14 @@ vpath %.c $(SRC_DIR)
 .PHONY : all clean fclean re
 
 all: $(NAME)
+
+$(NAME): $(OBJ)
 	%(СС) $(LIN_FLAG) -o $(NAME)
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-
-$(OBJ_DIR):
-	mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(OBJ_FLAG) -c $< -o $@ -I$(INC_DIR)
 
-clean: $(OBJ_DIR)
+clean:
 	rm -f $(OBJ)
 
 fclean: clean
