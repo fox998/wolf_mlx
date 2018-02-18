@@ -17,6 +17,7 @@ OBJ_DIR := ./obj/
 
 SDL_TAR := $(LIB_DIR)SDL2-2.0.7.tar.gz
 SDL_DIR := $(SDL_TAR:.tar.gz=/)
+SDL_INC := $(SDL_DIR)include/
 SDL := $(SDL_DIR)build/.libs/libSDL2.a
 
 SRC := 
@@ -33,7 +34,7 @@ NAME =
 
 vpath %.c $(SRC_DIR)
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re sdlfclean
 
 all: $(NAME)
 
@@ -41,19 +42,22 @@ $(NAME): $(SDL) $(OBJ)
 	%(СС) $(LIN_FLAG) -o $(NAME)
 
 $(SDL): $(SDL_DIR)
-	cd $(SDL_DIR) && ./configure
-	cd $(SDL_DIR) && make
+	cd $(SDL_DIR) && make > /dev/null
 
 $(SDL_DIR): $(SDL_TAR)
 	tar -xf $(SDL_TAR) -C $(LIB_DIR)
+	cd $(SDL_DIR) && ./configure > /dev/null
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(OBJ_FLAG) -c $< -o $@ -I$(INC_DIR)
 
 clean:
 	echo $(OBJ)
-	if test -f $(SDL_DIR)Makefile; then (make clean -C $(SDL_DIR)); fi
+
+sdlfclean:
+	rm -rf $(SDL_DIR)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -rf $(SDL_DIR)
+	if test -f $(SDL_DIR)Makefile; then (make clean -C $(SDL_DIR)); fi
+re: fclean all
