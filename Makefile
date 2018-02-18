@@ -41,9 +41,8 @@ $(NAME): $(SDL) $(OBJ)
 	%(СС) $(LIN_FLAG) -o $(NAME)
 
 $(SDL): $(SDL_DIR)
-	
-
-l : $(SDL_DIR)
+	cd $(SDL_DIR) && ./configure
+	cd $(SDL_DIR) && make
 
 $(SDL_DIR): $(SDL_TAR)
 	tar -xf $(SDL_TAR) -C $(LIB_DIR)
@@ -52,8 +51,9 @@ $(OBJ_DIR)%.o:%.c
 	$(CC) $(OBJ_FLAG) -c $< -o $@ -I$(INC_DIR)
 
 clean:
-	rm -f $(OBJ)
+	echo $(OBJ)
+	if test -f $(SDL_DIR)Makefile; then (make clean -C $(SDL_DIR)); fi
 
 fclean: clean
 	rm -f $(NAME)
-
+	rm -rf $(SDL_DIR)
