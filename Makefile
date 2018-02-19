@@ -15,22 +15,20 @@ LIB_DIR := ./lib/
 INC_DIR := ./inc/
 OBJ_DIR := ./obj/
 
-SDL_TAR := $(LIB_DIR)SDL2-2.0.7.tar.gz
-SDL_DIR := $(SDL_TAR:.tar.gz=/)
-SDL_INC := $(SDL_DIR)include/
-SDL := $(SDL_DIR)build/.libs/libSDL2.a
+MLX_DIR := $(LIB_DIR)minilibx/
+MLX := $(MLX_DIR)libmlx.a
 
-SRC := 
+SRC := main.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 OBJ_FLAG = -Wextra -Werror -Wall
 
-LIN_FLAG = 
+LIN_FLAG = -lmlx -lXext -lX11 -L $(MLX_DIR) -I$(MLX_DIR)
 
 CC = gcc
 
-NAME = 
+NAME = ./wolf3d
 
 vpath %.c $(SRC_DIR)
 
@@ -38,26 +36,21 @@ vpath %.c $(SRC_DIR)
 
 all: $(NAME)
 
-$(NAME): $(SDL) $(OBJ)
+$(NAME): $(MLX) $(OBJ)
 	%(СС) $(LIN_FLAG) -o $(NAME)
 
-$(SDL): $(SDL_DIR)
-	cd $(SDL_DIR) && make > /dev/null
-
-$(SDL_DIR): $(SDL_TAR)
-	tar -xf $(SDL_TAR) -C $(LIB_DIR)
-	cd $(SDL_DIR) && ./configure > /dev/null
+$(MLX):
+	make -C $(MLX_DIR)
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(OBJ_FLAG) -c $< -o $@ -I$(INC_DIR)
 
 clean:
-	echo $(OBJ)
-
-sdlfclean:
-	rm -rf $(SDL_DIR)
+	rm -f $(OBJ)
+	make clean -C $(MLX_DIR)
 
 fclean: clean
 	rm -f $(NAME)
-	if test -f $(SDL_DIR)Makefile; then (make clean -C $(SDL_DIR)); fi
+	make fclean -C $(MLX_DIR)
+
 re: fclean all
