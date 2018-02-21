@@ -15,8 +15,13 @@ LIB_DIR := ./lib/
 INC_DIR := ./inc/
 OBJ_DIR := ./obj/
 
+OS := $(shell uname)
+
 MLX_DIR := $(LIB_DIR)minilibx/
 MLX := $(MLX_DIR)libmlx.a
+
+FT_DIR := $(LIB_DIR)libft/
+LFT := $(FT_DIR)libft.a
 
 SRC := main.c
 
@@ -24,7 +29,13 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 OBJ_FLAG = -Wextra -Werror -Wall
 
-LIN_FLAG = -lmlx -lXext -lX11 -L $(MLX_DIR) -I$(MLX_DIR)
+ifeq ($(OS), Linux)
+	FRAMWORK = -lXext -lX11
+else 
+	FRAMWORK = -framework OpenGL -framework AppKit
+endif
+
+LIN_FLAG = $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(FT_DIR)
 
 CC = gcc
 
@@ -37,20 +48,19 @@ vpath %.c $(SRC_DIR)
 all: $(NAME)
 
 $(NAME): $(MLX) $(OBJ)
-	%(СС) $(LIN_FLAG) -o $(NAME)
+	$(CC) $(OBJ) $(LIN_FLAG) -o $(NAME)
 
 $(MLX):
-	make -C $(MLX_DIR)
+	make -C $(MLX_DIR) > /dev/null 2> /dev/null
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(OBJ_FLAG) -c $< -o $@ -I$(INC_DIR)
 
 clean:
 	rm -f $(OBJ)
-	make clean -C $(MLX_DIR)
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C $(MLX_DIR)
+	make clean -C $(MLX_DIR) > /dev/null 2> /dev/null
 
 re: fclean all
