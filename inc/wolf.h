@@ -32,6 +32,13 @@
 
 typedef double	t_rot_mat[4][4];
 
+typedef struct	s_map
+{
+	int				**m;
+	int				h;
+	int				w;
+}				t_map;
+
 typedef struct	s_image
 {
 	int				bit_pixel;
@@ -59,5 +66,6 @@ typedef struct	s_thread
 	int				num;
 	pthread_t		des;
 }               t_thread;    
+
 
 #endif

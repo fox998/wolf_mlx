@@ -20,10 +20,10 @@ OS := $(shell uname)
 MLX_DIR := $(LIB_DIR)minilibx/
 MLX := $(MLX_DIR)libmlx.a
 
-FT_DIR := $(LIB_DIR)libft/
-LFT := $(FT_DIR)libft.a
+LFT_DIR := $(LIB_DIR)libft/
+LFT := $(LFT_DIR)libft.a
 
-SRC := main.c
+SRC := main.c read_map.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
@@ -35,11 +35,11 @@ else
 	FRAMWORK = -framework OpenGL -framework AppKit
 endif
 
-LIN_FLAG = $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(FT_DIR)
+LIN_FLAG = $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
 
 CC = gcc
 
-NAME = ./wolf3d
+NAME = wolf3d
 
 vpath %.c $(SRC_DIR)
 
@@ -47,8 +47,11 @@ vpath %.c $(SRC_DIR)
 
 all: $(NAME)
 
-$(NAME): $(MLX) $(OBJ)
+$(NAME): $(LFT) $(MLX) $(OBJ) 
 	$(CC) $(OBJ) $(LIN_FLAG) -o $(NAME)
+
+$(LFT):
+	make -C $(LFT_DIR) 2> /dev/null
 
 $(MLX):
 	make -C $(MLX_DIR) > /dev/null 2> /dev/null
@@ -58,9 +61,13 @@ $(OBJ_DIR)%.o:%.c
 
 clean:
 	rm -f $(OBJ)
+	make clean -C $(LFT_DIR)
 
 fclean: clean
 	rm -f $(NAME)
+
+cleanlib:
+	make fclean -C $(LFT_DIR) > /dev/null 2> /dev/null
 	make clean -C $(MLX_DIR) > /dev/null 2> /dev/null
 
 re: fclean all
