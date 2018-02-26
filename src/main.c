@@ -1,20 +1,15 @@
 
 #include "../inc/wolf.h"
-#include "../inc/read.h"
 #include "../lib/libft/libft.h"
-
-#include <stdio.h>
+#include "../lib/minilibx/mlx.h"
 
 int main(int argc, char **argv)
 {
-	t_map	map;
+	t_window	wind;
 
-	map.m = NULL;
-	if (argc == 2)
-		read_map(argv[1], &map.m, &map.h, &map.w);
-	
-	ft_putstr("\nHello World\n");
-	for(int i = 0; i < map.h; i++)
-		free(map.m[i]);
-	free(map.m);
+	if (argc != 2)
+		return (1);
+	wind_init(&wind, argv[1]);
+	render(&wind);
+	mlx_loop(wind.mlx);
 }

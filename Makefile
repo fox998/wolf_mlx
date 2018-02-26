@@ -23,11 +23,12 @@ MLX := $(MLX_DIR)libmlx.a
 LFT_DIR := $(LIB_DIR)libft/
 LFT := $(LFT_DIR)libft.a
 
-SRC := main.c read_map.c
+SRC := main.c read_map.c wind_init.c hook.c render.c mini_map.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-OBJ_FLAG = -Wextra -Werror -Wall
+OBJ_FLAG = 
+# -Wextra -Werror -Wall
 
 ifeq ($(OS), Linux)
 	FRAMWORK = -lXext -lX11
@@ -35,7 +36,7 @@ else
 	FRAMWORK = -framework OpenGL -framework AppKit
 endif
 
-LIN_FLAG = $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
+LIN_FLAG = -lm $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
 
 CC = gcc
 
