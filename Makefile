@@ -36,7 +36,7 @@ else
 	FRAMWORK = -framework OpenGL -framework AppKit
 endif
 
-LIN_FLAG = -lm $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
+LIN_FLAG = -O3 -lpthread -lm $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
 
 CC = gcc
 

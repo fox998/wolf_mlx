@@ -20,7 +20,24 @@
 #  define D_KEY 2
 #  define SPASE 49
 # else
-#  define ONE 1
+#  define ESC 65307
+#  define RIGHT_ERROW 65363
+#  define LEFT_ERROW 65361
+#  define UP_ERROW 65362
+#  define DOWN_ERROW 65364
+#  define MINUS 65453
+#  define PLUS 65451
+#  define ONE 49
+#  define TWO 50
+#  define Q_KEY 1738
+#  define W_KEY 1731
+#  define E_KEY 1749
+#  define A_KEY 1734
+#  define S_KEY 1753
+#  define D_KEY 1751
+#  define SPASE 32
+#  define M_LEFT 1
+#  define M_RIGT 3
 # endif
 
 #endif

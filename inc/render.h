@@ -12,5 +12,4 @@ typedef struct  s_raycaster
     i_vec2		step;
 }               t_reycaster;
 
-
 #endif

@@ -4,38 +4,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-/*
-
-typedef struct	s_image
-{
-	int				bit_pixel;
-	int				line_size;
-	int				endian;
-	void			*img_ptr;
-	char			*pix_ptr;
-}               t_image;
-
-typedef struct	s_window
-{
-	int				*num_of_wind;
-	void			*mlx;
-	void			*win;
-	t_image			*img;
-	t_rot_mat		*rot;
-	t_map			*map;
-	void			*(*fract_foo)(void *param);
-	int				line_per_thread;
-}				t_window;
-
-mlx_get_data_addr ( void *img_ptr, int *bits_per_pixel, int *size_line, int *endian );
-
-static void mat_rot_init(t_rot_mat *rot)
-{
-	(*rot)[0][0] = 0;
-}
-
-*/
-
 static t_cam	*get_cam(double eng, int posX, int posY)
 {
 	t_cam	*tmp;

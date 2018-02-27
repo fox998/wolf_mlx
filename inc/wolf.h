@@ -49,6 +49,7 @@ typedef struct	s_window
 	t_map			*map;
 }				t_window;   
 
+void	hook_init(t_window *wind);
 void    wind_init(t_window *wind, char *map_path);
 void	render(t_window *wind);
 

@@ -11,5 +11,6 @@ int main(int argc, char **argv)
 		return (1);
 	wind_init(&wind, argv[1]);
 	render(&wind);
+	hook_init(&wind);
 	mlx_loop(wind.mlx);
 }
