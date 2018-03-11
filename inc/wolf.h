@@ -3,7 +3,7 @@
 # define WOLF_H
 
 # define WIN_W 1000
-# define WIN_H 800
+# define WIN_H 600
 
 typedef double	t_rot_mat[4][4];
 
@@ -17,9 +17,11 @@ typedef struct	s_map
 typedef struct	s_image
 {
 	int				bit_pixel;
+	int				byte_pixel;
 	int				line_size;
 	int				endian;
 	int				h;
+	int				w;
 	void			*img_ptr;
 	char			*pix_ptr;
 }               t_image;
@@ -42,6 +44,7 @@ typedef struct	s_window
 	void			*mlx;
 	void			*win;
 	void			*(*fract_foo)(void *param);
+	t_image			*tex;
 	t_image			*scrin;
 	t_image			*mini_map;
 	t_rot_mat		*rot;
@@ -52,5 +55,6 @@ typedef struct	s_window
 void	hook_init(t_window *wind);
 void    wind_init(t_window *wind, char *map_path);
 void	render(t_window *wind);
+void    texture_init(t_window *wind);
 
 #endif

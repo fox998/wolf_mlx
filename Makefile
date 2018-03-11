@@ -23,7 +23,7 @@ MLX := $(MLX_DIR)libmlx.a
 LFT_DIR := $(LIB_DIR)libft/
 LFT := $(LFT_DIR)libft.a
 
-SRC := main.c read_map.c wind_init.c hook.c render.c mini_map.c
+SRC := main.c read_map.c wind_init.c hook.c render.c mini_map.c texture.c
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 

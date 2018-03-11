@@ -4,7 +4,7 @@
 # include "wolf.h"
 # include <pthread.h>
 
-# define NUM_OF_THREADS 8
+# define NUM_OF_THREADS 20
 
 typedef struct s_window t_window;
 
