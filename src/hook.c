@@ -24,8 +24,8 @@ int		mouse_move_hook(int x, int y, void *param)
 	if (abs(xc - x) < 3)
 		return 0;
 	wind = (t_window *)param;
-	x  > xc ? (eng = M_PI * (2) / 180.0) : 0;
-	x  < xc ? (eng = M_PI * (-2) / 180.0) : 0;
+	x  > xc ? (eng = M_PI * (3) / 180.0) : 0;
+	x  < xc ? (eng = M_PI * (-3) / 180.0) : 0;
 	oldx = wind->cam->dir[0];
 	cos_sin[0] = cos(eng);
 	cos_sin[1] = sin(eng);
@@ -40,7 +40,7 @@ int		mouse_move_hook(int x, int y, void *param)
 
 int		mouse_hook(int key, int x, int y, void *param)
 {
-	
+	return (0);
 }
 
 int		key_hook(int key, void *param)
@@ -52,7 +52,7 @@ int		key_hook(int key, void *param)
 	int			new_map[2];
 
 	wind = (t_window *)param;
-	delta_pos = 0.1;
+	delta_pos = 0.09;
 	key == ESC ? exit(0) : 0;
 	(key == A_KEY || key == D_KEY) ? (direct = &wind->cam->plane) : (direct = &wind->cam->dir);
 	(key == A_KEY || key == S_KEY) ? sign = -1 : (sign = 1);
@@ -63,6 +63,7 @@ int		key_hook(int key, void *param)
 	wind->cam->cam_pos[0] += (*direct)[0] * delta_pos * sign;
 	wind->cam->cam_pos[1] += (*direct)[1] * delta_pos * sign;
 	render(wind);
+	return (0);
 }
 
 void	hook_init(t_window *wind)

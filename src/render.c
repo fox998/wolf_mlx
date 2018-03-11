@@ -31,7 +31,7 @@ void	ver_line(t_reycaster r, t_window *wind, int x)
 	int			tex[2];
 
 	tex[0] = r.wallX * r.tex->w;
-	(r.side == 0 &&  wind->cam->dir[0] > 0) || (r.side == 1 &&  wind->cam->dir[1] < 0) ? tex[0] = wind->tex->w - tex[0] - 1 : 0;
+	//(r.side == 0 &&  wind->cam->dir[0] > 0) || (r.side == 1 &&  wind->cam->dir[1] < 0) ? tex[0] = wind->tex->w - tex[0] - 1 : 0;
 	line_h = WIN_H / r.perp_wall_dist;
 	border = ft_max((WIN_H - line_h) / 2, 0);
 	y = -1;
@@ -107,8 +107,9 @@ void	render(t_window *wind)
 	int			num;
 	static int	time = 0;
 
-	if (clock() - time < 100 )
+	if (clock() - time < 200 )
 		return ;
+	time = clock();
 	x = -1;
 	while (++x < NUM_OF_THREADS)
 	{
@@ -128,5 +129,4 @@ void	render(t_window *wind)
 		x += NUM_OF_THREADS;
 	}
 	mlx_put_image_to_window(wind->mlx, wind->win, wind->scrin->img_ptr, 0, 0);
-	time = clock();
 }

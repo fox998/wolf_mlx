@@ -28,7 +28,7 @@ void    texture_init(t_window *wind)
 	i = -1;
 	h = TEX_H;
 	w = TEX_W;
-	arr_t = (t_image*)malloc(sizeof(t_image) * 4);
+	arr_t = (t_image *)malloc(sizeof(t_image) * 4);
 	arr_t[0].img_ptr = mlx_xpm_to_image(wind->mlx, redbrick_xpm, &w, &h);
 	arr_t[1].img_ptr = mlx_xpm_to_image(wind->mlx, bluestone_xpm, &w, &h);
 	arr_t[2].img_ptr = mlx_xpm_to_image(wind->mlx, colorstone_xpm, &w, &h);

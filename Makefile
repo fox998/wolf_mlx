@@ -30,13 +30,15 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 OBJ_FLAG = 
 # -Wextra -Werror -Wall
 
+FRAMWORK :=
+
 ifeq ($(OS), Linux)
-	FRAMWORK = -lXext -lX11
+	FRAMWORK = -lXext -lX11 $(MLX)
 else 
-	FRAMWORK = -framework OpenGL -framework AppKit
+	FRAMWORK = -lmlx -framework OpenGL -framework AppKit
 endif
 
-LIN_FLAG = -O3 -lpthread -lm $(LFT) $(MLX) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
+LIN_FLAG = -O3 -lpthread -lm $(LFT) $(FRAMWORK) -I$(MLX_DIR) -I$(LFT_DIR)
 
 CC = gcc
 
